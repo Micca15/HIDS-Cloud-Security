@@ -2,14 +2,6 @@ from flask import Flask, request, jsonify
 from settings import *
 from UserModel import User, Computer, File, db
 import pprint
-"""
-{
-    "user" : {"name" : "Thomas", "guid" : "1337x"},
-    "computer" : {"name" : "DESKTOP-1337"},
-    "file" : {"name" : "virus.exe", "path":"/roet", "hash" : "hhhh"  }
-}
-"""
-
 
 # endpoint to create new user
 @app.route("/hids", methods=["POST"])
