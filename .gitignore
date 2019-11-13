@@ -3,3 +3,4 @@
 *.pyc
 *.xml
 .idea/HIDS-Cloud-Security.iml
+server.log
