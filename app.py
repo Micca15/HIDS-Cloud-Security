@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from flask import request, send_from_directory
+=======
+from flask import Flask, request, jsonify, send_file
+>>>>>>> 3bc5d5e27c397e64f954974a56a7d25e8521f5f7
 from werkzeug.utils import secure_filename
 from settings import *
 from models.user import User
@@ -45,7 +49,7 @@ def upload():
             return ("", 204)
 
     if request.method == 'GET':
-        return send_from_directory(os.path.join('conf'), 'conf.cfg', as_attachment=True)
+        return send_file('conf\\' + 'conf.cfg', as_attachment=True)
 
 # Run Server
 if __name__ == '__main__':
