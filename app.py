@@ -1,7 +1,9 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import request, send_from_directory
 from werkzeug.utils import secure_filename
 from settings import *
-from UserModel import User, Computer, File, db
+from models.user import User
+from models.computer import Computer
+from models.file import File
 
 # endpoint to create new user
 @app.route("/hids", methods=["POST"])
@@ -45,9 +47,9 @@ def upload():
     if request.method == 'GET':
         return send_from_directory(os.path.join('conf'), 'conf.cfg', as_attachment=True)
 
-# r'C:\Users\micha\OneDrive\Documenten\GitHub\HIDS-Cloud-Security\conf'
-
 # Run Server
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=9000, debug=True)
+    from db import db
+    db.init_app(app)
+    app.run(port=9000, debug=True)
 
