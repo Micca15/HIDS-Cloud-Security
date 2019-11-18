@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 from settings import *
 from UserModel import User, Computer, File, db
@@ -43,10 +43,11 @@ def upload():
             return ("", 204)
 
     if request.method == 'GET':
-        return
+        return send_from_directory(os.path.join('conf'), 'conf.cfg', as_attachment=True)
 
+# r'C:\Users\micha\OneDrive\Documenten\GitHub\HIDS-Cloud-Security\conf'
 
 # Run Server
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=9000, debug=True)
+    app.run(host='127.0.0.1', port=9000, debug=True)
 
