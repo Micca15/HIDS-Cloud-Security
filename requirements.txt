@@ -1,3 +1,4 @@
+werkzeug
 Flask
 flask_marshmallow
 Flask_SQLAlchemy
