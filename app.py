@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file, send_from_directory
+from flask import request, send_from_directory
 from werkzeug.utils import secure_filename
 from settings import *
 from models.user import User
@@ -21,8 +21,6 @@ def add_user():
     db.session.add(new_file)
     db.session.commit()
     return("ok")
-    # return jsonify({"user": new_user, "computer": new_computer, "file": new_file})
-
 
 def allowed_file(filename):
     return '.' in filename and \
