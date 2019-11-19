@@ -2,31 +2,21 @@ from flask_restful import Resource, reqparse
 from flask import request, send_from_directory
 from werkzeug.utils import secure_filename
 from settings import *
-from models.user import User
-from models.computer import Computer
-from models.file import File
-
+from resources.user import UserRegister
+from resources.file import File, FileList
+from resources.computer import Computer, ComputerList
 
 # create db with the tables in models
 @app.before_first_request
 def create_tables():
     db.create_all()
 
-# endpoint to create new user
-@app.route("/hids", methods=["POST"])
-def add_user():
-    user = request.json['user']
-    computer = request.json['computer']
-    file = request.json['file']
-    new_user = User(user)
-    new_computer = Computer(computer)
-    new_file = File(file)
 
-    db.session.add(new_user)
-    db.session.add(new_computer)
-    db.session.add(new_file)
-    db.session.commit()
-    return ("ok", 200)
+api.add_resource(File, '/file')
+api.add_resource(FileList, '/files')
+api.add_resource(UserRegister, '/register')
+api.add_resource(Computer, '/computer/<string:name>')
+api.add_resource(ComputerList, '/computers')
 
 
 def allowed_file(filename):
