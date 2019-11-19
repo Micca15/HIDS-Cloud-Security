@@ -3,6 +3,7 @@ from resources.user import UserRegister
 from resources.file import File, FileList
 from resources.computer import Computer, ComputerList
 from resources.upload import Upload
+from resources.hids import Hids
 
 # create db with the tables in models
 @app.before_first_request
@@ -16,7 +17,7 @@ api.add_resource(UserRegister, '/register')
 api.add_resource(Computer, '/computer/<string:name>')
 api.add_resource(ComputerList, '/computers')
 api.add_resource(Upload, '/upload')
-
+api.add_resource(Hids, '/hids')
 
 
 # Run Server

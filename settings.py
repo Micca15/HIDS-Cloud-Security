@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 from flask_restful import Api
+from flask_marshmallow import Marshmallow
 
 # Init app
 app = Flask(__name__)

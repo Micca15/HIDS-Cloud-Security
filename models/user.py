@@ -6,11 +6,10 @@ class UserModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    guid = db.Column(db.String(80))
+    uuid = db.Column(db.String(80))
 
-    def __init__(self, name: str, guid: str):
-        self.name = name
-        self.guid = guid
+    def __init__(self, uuid: str):
+        self.uuid = uuid
 
     def save_to_db(self):
         db.session.add(self)

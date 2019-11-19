@@ -24,6 +24,8 @@ class File(Resource):
         data = File.parser.parse_args()
 
         if FileModel.find_by_name(data['name']) and (data['hash']):
+            # hier maak ik een log aan voor de analyser
+
             return {"message": "A file with that name already exists"}
 
         user = FileModel(**data)
