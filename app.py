@@ -3,7 +3,7 @@ from resources.user import UserRegister
 from resources.file import File, FileList
 from resources.computer import Computer, ComputerList
 from resources.upload import Upload
-from resources.hids import Hids
+from hids import Hids
 
 # create db with the tables in models
 @app.before_first_request
@@ -22,7 +22,5 @@ api.add_resource(Hids, '/hids')
 
 # Run Server
 if __name__ == '__main__':
-    from settings import db
-
     db.init_app(app)
     app.run(port=9000, debug=True)

@@ -1,4 +1,4 @@
-from flask_restful import Resource, reqparse, request
+from flask_restful import Resource, reqparse
 from models.computer import ComputerModel
 from models.user import UserModel
 from models.file import FileModel
