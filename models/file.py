@@ -11,7 +11,7 @@ class FileModel(db.Model):
 
     def __init__(self, files):
         self.path = files["path"]
-        self.name = files["file"]
+        self.file = files["file"]
         self.hash = files["hash"]
 
     def json(self):
