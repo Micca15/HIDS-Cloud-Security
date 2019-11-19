@@ -16,14 +16,14 @@ class File(Resource):
                         )
     parser.add_argument('hash',
                         type=str,
-                        required=False,
+                        required=True,
                         help="Every file- needs a store id!"
                         )
 
     def post(self):
         data = File.parser.parse_args()
 
-        if FileModel.find_by_name(data['name']):
+        if FileModel.find_by_name(data['name']) and (data['hash']):
             return {"message": "A file with that name already exists"}
 
         user = FileModel(**data)
