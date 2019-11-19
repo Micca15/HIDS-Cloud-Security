@@ -1,4 +1,4 @@
-from db import db
+from settings import db
 
 
 class ComputerModel(db.Model):

@@ -22,7 +22,7 @@ api.add_resource(Hids, '/hids')
 
 # Run Server
 if __name__ == '__main__':
-    from db import db
+    from settings import db
 
     db.init_app(app)
     app.run(port=9000, debug=True)

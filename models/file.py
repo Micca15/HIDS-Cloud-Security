@@ -1,4 +1,4 @@
-from db import db
+from settings import db
 
 
 class FileModel(db.Model):
