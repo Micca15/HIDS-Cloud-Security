@@ -11,12 +11,12 @@ class Hids(Resource):
 
     parser.add_argument('uuid',
                         type=str,
-                        required=False,
+                        required=True,
                         help="Every file- needs a guid!"
                         )
     parser.add_argument('computer',
                         type=str,
-                        required=False,
+                        required=True,
                         help="Every file- needs a computer!"
                         )
     parser.add_argument('files',
@@ -48,7 +48,7 @@ class Config(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('uuid',
                         type=str,
-                        required=False,
+                        required=True,
                         help="Every config needs a uuid!"
                         )
     parser.add_argument('computer_name',
