@@ -5,7 +5,7 @@ class ConfigModel(db.Model):
     __tablename__ = 'config'
 
     id = db.Column(db.Integer, primary_key=True)
-    uuid = db.Column(db.String(255))
+    uuid = db.Column(db.String(255), db.ForeignKey('user.uuid'))
     computer_name = db.Column(db.String(255))
     interval = db.Column(db.Integer)
     path = db.Column(db.String(255))

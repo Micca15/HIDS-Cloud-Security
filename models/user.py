@@ -4,9 +4,10 @@ from settings import db
 class UserModel(db.Model):
     __tablename__ = 'user'
 
-    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    uuid = db.Column(db.String(80))
+    uuid = db.Column(db.String(80), primary_key=True)
+
+    files = db.relationship('FileModel', lazy='dynamic')
 
     def __init__(self, uuid: str):
         self.uuid = uuid
@@ -20,5 +21,5 @@ class UserModel(db.Model):
         return cls.query.filter_by(name=name).first()
 
     @classmethod
-    def find_by_id(cls, _id):
-        return cls.query.filter_by(id=_id).first()
+    def find_by_uuid(cls, uuid):
+        return cls.query.filter_by(uuid=uuid).first()

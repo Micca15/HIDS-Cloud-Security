@@ -5,6 +5,7 @@ from hids import Hids, Config, ComputerList, FileList
 # create db with the tables in models
 @app.before_first_request
 def create_tables():
+    db.drop_all()
     db.create_all()
 
 

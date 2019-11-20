@@ -11,12 +11,12 @@ class Hids(Resource):
 
     parser.add_argument('uuid',
                         type=str,
-                        required=True,
+                        required=False,
                         help="Every file- needs a guid!"
                         )
     parser.add_argument('computer',
                         type=str,
-                        required=True,
+                        required=False,
                         help="Every file- needs a computer!"
                         )
     parser.add_argument('files',
@@ -28,18 +28,32 @@ class Hids(Resource):
 
     def post(self):
         data = Hids.parser.parse_args()
+        uuid = data["uuid"]
+        pc_id = data["computer"]
 
-        # if FileModel.find_by_name(data['name']) and (data['hash']):
         # hier maak ik een log aan voor de analyser
 
         # return {"message": "A file with that name already exists"}
-        print(data)
-        # file.save_to_db()
-        UserModel(data.uuid).save_to_db()
-        ComputerModel(data.computer).save_to_db()
+
+        # create user
+        if UserModel.find_by_uuid(uuid) is None:
+            UserModel(data.uuid).save_to_db()
+
+        # create pc_name
+        if ComputerModel.find_by_name(pc_id) is None:
+            ComputerModel(data.computer).save_to_db()
+
+        # add files to user/pc
         for file in data["files"]:
-            FileModel(file).save_to_db()
-            print(file)
+            file_path = file["path"]
+            file_name = file["name"]
+            file_hash = file["hash"]
+            file_exists = FileModel.find_existing(file_path, file_name, uuid, pc_id)
+            if file_exists:
+                FileModel(file, uuid, pc_id).save_to_db()
+            else:
+                print(file_exists)
+
 
         return {"message": "file created successfully"}, 201
 
