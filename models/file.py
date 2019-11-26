@@ -21,7 +21,7 @@ class FileModel(db.Model):
         self.pc_id = pc_id
 
     def json(self):
-        return {'id': self.id, 'pc_name': self.pc.name, 'name': self.name, 'path': self.path, 'curr_hash': self.curr_hash, 'prev_hash': self.prev_hash, 'last_updated': self.last_updated.strftime('%Y,%m,%d,%H:%M:%S')}
+        return {'pc_name': self.pc.name, 'name': self.name, 'path': self.path, 'curr_hash': self.curr_hash, 'prev_hash': self.prev_hash, 'last_updated': self.last_updated.strftime('%Y,%m,%d,%H:%M:%S')}
 
     @classmethod
     def find_by_name(cls, name):
