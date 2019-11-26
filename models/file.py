@@ -1,5 +1,5 @@
 from settings import db
-
+import time
 
 class FileModel(db.Model):
     __tablename__ = 'file'
@@ -10,7 +10,7 @@ class FileModel(db.Model):
     path = db.Column(db.String(255))
     curr_hash = db.Column(db.String(255))
     prev_hash = db.Column(db.String(255))
-    last_updated = db.Column(db.DateTime, default=db.func.current_timestamp())
+    last_updated = db.Column(db.Float, default=time.time())
 
     pc = db.relationship('ComputerModel')
 
@@ -21,7 +21,8 @@ class FileModel(db.Model):
         self.pc_id = pc_id
 
     def json(self):
-        return {'id': self.id,'pc_name': self.pc.name, 'name': self.name, 'path': self.path, 'curr_hash': self.curr_hash, 'prev_hash': self.prev_hash, 'last_updated': self.last_updated.strftime('%Y,%m,%d,%H:%M:%S')}
+        return {'id': self.id,'pc_name': self.pc.name, 'name': self.name, 'path': self.path, 'curr_hash': self.curr_hash, 'prev_hash': self.prev_hash,
+                'last_updated': self.last_updated}
 
     @classmethod
     def find_by_name(cls, name):
@@ -30,6 +31,10 @@ class FileModel(db.Model):
     @classmethod
     def find_changes_by_pc_id(cls, pc_id):
         return cls.query.filter_by(pc_id=pc_id).filter(cls.curr_hash != cls.prev_hash).all()
+
+    @classmethod
+    def find_by_pc_id(cls, pc_id):
+        return cls.query.filter_by(pc_id=pc_id).all()
 
     @classmethod
     def find_existing(cls, path, name, pc_id):

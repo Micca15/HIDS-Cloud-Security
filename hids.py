@@ -2,6 +2,9 @@ from flask_restful import Resource, reqparse
 from models.computer import ComputerModel
 from models.user import UserModel
 from models.file import FileModel
+from settings import FILE_DELETION_TIMEOUT, ANALYZER_URL
+import time
+import requests
 
 
 class Hids(Resource):
@@ -55,9 +58,22 @@ class Hids(Resource):
                 FileModel.find_and_replace(file_id, file_hash)
 
         # changed_files = FileModel.find_changes_by_pc_id(pc_id).json()
-        changed_files = {'files': [file.json() for file in FileModel.find_changes_by_pc_id(pc_id)]}
-        print(changed_files)
-
+        # changed_files = {'files': [file.json() for file in FileModel.find_changes_by_pc_id(pc_id)]}
+        # print(changed_files)
+        analyzer_object = {}
+        for file in FileModel.find_by_pc_id(pc_id):
+            file = file.json()
+            if file["prev_hash"] is None:
+                analyzer_object.update({"new": file})
+            elif file["curr_hash"] != file["prev_hash"]:
+                analyzer_object.update({"update": file})
+            elif (time.time() - file["last_updated"]) > FILE_DELETION_TIMEOUT:
+                analyzer_object.update({"deleted": file})
+        print(analyzer_object)
+        try:
+            response = requests.post(url=ANALYZER_URL, json=analyzer_object)
+        except:
+            pass
         return {"message": "file created successfully"}, 201
 
 
