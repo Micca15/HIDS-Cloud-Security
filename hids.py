@@ -56,9 +56,7 @@ class Hids(Resource):
 
         # changed_files = FileModel.find_changes_by_pc_id(pc_id).json()
         changed_files = {'files': [file.json() for file in FileModel.find_changes_by_pc_id(pc_id)]}
-        print (changed_files)
-
-
+        print(changed_files)
 
         return {"message": "file created successfully"}, 201
 
