@@ -5,17 +5,21 @@ class ComputerModel(db.Model):
     __tablename__ = 'computer'
 
     id = db.Column(db.Integer, primary_key=True)
-    computer = db.Column(db.String(80))
+    name = db.Column(db.String(80))
+    user_uid = db.Column(db.String(255), db.ForeignKey('user.uuid'))
 
-    def __init__(self, computer):
-        self.computer = computer
+    user = db.relationship('UserModel')
+
+    def __init__(self, name, uuid):
+        self.name = name
+        self.user_uid = uuid
 
     def json(self):
-        return {'id': self.id, 'computer': self.computer, 'items': [x.json() for x in self.items.all()]}
+        return {'id': self.id, 'name': self.name, 'user_uid': self.user_uid }
 
     @classmethod
-    def find_by_name(cls, computer):
-        return cls.query.filter_by(computer=computer).first()
+    def find_by_name(cls, name, uuid):
+        return cls.query.filter_by(name=name, user_uid=uuid).first()
 
     def save_to_db(self):
         db.session.add(self)

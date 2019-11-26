@@ -7,8 +7,6 @@ class UserModel(db.Model):
     name = db.Column(db.String(80))
     uuid = db.Column(db.String(80), primary_key=True)
 
-    files = db.relationship('FileModel', lazy='dynamic')
-
     def __init__(self, uuid: str):
         self.uuid = uuid
 
