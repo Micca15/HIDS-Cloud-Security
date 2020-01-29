@@ -37,7 +37,7 @@ class Scanner:
                 hash_content = (str(readfile(current_file)) + str(current_modified_date))
                 hash_as_bytestream = hashlib.md5(hash_content.encode('UTF-8')).digest()
                 file_and_hash_obj.update({"path": rootDir})
-                file_and_hash_obj.update({"file": file})
+                file_and_hash_obj.update({"name": file})
                 file_and_hash_obj.update({"hash": hash_as_bytestream.hex()})
                 files.append(file_and_hash_obj)
         send_data_to_logger(files)
@@ -67,5 +67,6 @@ def send_data_to_logger(files):
             "computer": data['computer_name'],
             "files": files
         }
+        print(request_data)
     url = 'http://' + data['logger_url']
     response = requests.post(url=url, json=request_data)

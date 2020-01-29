@@ -1,4 +1,4 @@
-from settings import db
+from logger.settings import db
 
 
 class UserModel(db.Model):

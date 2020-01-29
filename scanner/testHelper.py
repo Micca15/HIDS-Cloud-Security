@@ -1,4 +1,4 @@
-from testMain import ScannerClass
+from scanner.testMain import ScannerClass
 from time import sleep
 import os
 import hashlib
