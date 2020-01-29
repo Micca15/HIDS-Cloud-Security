@@ -71,10 +71,19 @@ class Hids(Resource):
                 analyzer_object.update({"deleted": file})
         print(analyzer_object)
         try:
+            print(analyzer_object)
             response = requests.post(url=ANALYZER_URL, json=analyzer_object)
-        except:
-            pass
-        return {"message": "file created successfully"}, 201
+            response.raise_for_status()
+            return response.json()
+        # Handling exceptions
+        except requests.exceptions.HTTPError as errh:
+            print("HTTP error:", errh)
+        except requests.exceptions.ConnectionError as errc:
+            print("Connection error:", errc)
+        except requests.exceptions.Timeout as errt:
+            print("Timeout error", errt)
+        except requests.exceptions.RequestException as err:
+            print("Other error", err)
 
 
 class ComputerList(Resource):

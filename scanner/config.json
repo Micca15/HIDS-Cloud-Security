@@ -4,5 +4,5 @@
   "interval": 30,
   "path": "C:\\Users\\micha\\Documents\\HIDS_TESTER",
   "whitelist": ["\\FOLDER1", ".txt", ".exe", ".asc"],
-  "logger_url": "127.0.0.1:9000/hids"
+  "logger_url": "127.0.0.1:4000/hids"
 }
