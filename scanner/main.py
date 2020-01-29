@@ -69,4 +69,16 @@ def send_data_to_logger(files):
         }
         print(request_data)
     url = 'http://' + data['logger_url']
-    response = requests.post(url=url, json=request_data)
+    try:
+        response = requests.post(url=url, json=request_data)
+        response.raise_for_status()
+    # Handling exceptions
+    except requests.exceptions.HTTPError as errh:
+        print("HTTP error:", errh)
+    except requests.exceptions.ConnectionError as errc:
+        print("Connection error:", errc)
+    except requests.exceptions.Timeout as errt:
+        print("Timeout error", errt)
+    except requests.exceptions.RequestException as err:
+        print("Other error", err)
+
