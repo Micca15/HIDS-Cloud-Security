@@ -1,0 +1,8 @@
+{
+  "computer_name": "DESKTOP-05LUT9P",
+  "uuid": "083b3668-0a5a-11ea-9ceb-28f10e4af7a1",
+  "interval": 30,
+  "path": "C:\\Users\\Danesh\\Documents\\HIDS_TESTER",
+  "whitelist": ["\\FOLDER1", ".txt", ".exe", ".asc"],
+  "logger_url": "127.0.0.1:9000/hids"
+}
