@@ -1,8 +1,8 @@
 from flask_restful import Resource, reqparse
-from models.computer import ComputerModel
-from models.user import UserModel
-from models.file import FileModel
-from settings import FILE_DELETION_TIMEOUT, ANALYZER_URL
+from logger.models.computer import ComputerModel
+from logger.models.user import UserModel
+from logger.models.file import FileModel
+from logger.settings import FILE_DELETION_TIMEOUT, ANALYZER_URL
 import time
 import requests
 

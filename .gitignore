@@ -1,6 +1,6 @@
 
-.idea/workspace.xml
-*.pyc
-*.xml
-.idea/HIDS-Cloud-Security.iml
-server.log
+__pycache__/
+
+\.idea/
+
+venv/
