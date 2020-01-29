@@ -38,12 +38,12 @@ class Analyser:
 
     def calculate_score(self, parsed_json_log):
         for file in parsed_json_log:
-            split_name = file['file_name'].split('.')
+            split_name = file['name'].split('.')
             if split_name[1] is '.dll':
                 self.file_score += self.risk_scores['IsDLL']
             if split_name[1] is '.exe':
                 self.file_score += self.risk_scores['IsEXE']
-            if file['location'] in self.system_locations:
+            if file['path'] in self.system_locations:
                 self.file_score += self.risk_scores['IsSystemFile']
             else:
                 self.file_score += self.risk_scores['IsUserFile']
